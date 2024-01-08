@@ -1,0 +1,7 @@
+{
+  "name": "vaikaNet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
