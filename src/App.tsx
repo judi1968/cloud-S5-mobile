@@ -1,5 +1,5 @@
-import { Redirect, Route, useLocation } from 'react-router-dom';
-import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact, useIonRouter } from '@ionic/react';
+import { Redirect, Route } from 'react-router-dom';
+import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 
@@ -23,53 +23,29 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Login from './pages/Login';
 import CreerCompte from './pages/CreerCompte';
-import Accueil from './pages/Accueil';
-import CreerAnnonce from './pages/CreerAnnonce';
-import { library, playCircle, radio, search } from 'ionicons/icons';
-// import { useEffect } from 'react';
+import RooterPage from './pages/RooterPage';
 
 setupIonicReact();
 
-const App: React.FC = () => {
-  const ionRouter = useIonRouter();
-  return(
-  
+const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-    <IonTabs>
-        <IonRouterOutlet>
-          <Redirect exact path="/" to="/home" />
-  
-          <Route path="/home" render={() => <Accueil />} exact={true} />
-          <Route path="/login" render={() => <Login />} exact={true} />
-          <Route path="/creer_compte" render={() => <CreerCompte />} exact={true} />
-          <Route path="/creer_annonce" render={() => <CreerAnnonce />} exact={true} />
-        </IonRouterOutlet>
-
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={playCircle} />
-            <IonLabel>Listen now</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="radio" href="/radio">
-            <IonIcon icon={radio} />
-            <IonLabel>Radio</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="creer_annonce" href="/creer_annonce">
-            <IonIcon icon={library} />
-            <IonLabel>Creer annonce</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="login" href="/login">
-            <IonIcon icon={search} />
-            <IonLabel>Login</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+      <IonRouterOutlet>
+        <Route exact path="/rooter_page">
+          <RooterPage />
+        </Route>
+        <Route exact path="/creer_compte">
+          <CreerCompte />
+        </Route>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
+      </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-)};
+);
 
 export default App;
