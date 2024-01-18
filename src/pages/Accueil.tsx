@@ -8,7 +8,6 @@ const Accueil: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         Accueil
-        <FooterTab></FooterTab>
       </IonContent>
     </IonPage>
   );

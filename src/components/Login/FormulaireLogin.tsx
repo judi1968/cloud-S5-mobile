@@ -10,7 +10,7 @@ const Formulaire: React.FC = () => {
   // Fonction de gestion du clic sur le lien
   const handleLinkClick = () => {
     // Utilisez history.push pour naviguer vers la page désirée
-    history.push('/accueil');
+    history.push('/home');
   }
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

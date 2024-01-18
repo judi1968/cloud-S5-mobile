@@ -15,43 +15,7 @@ import Accueil from '../pages/Accueil';
 
 function FooterTab() {
   return (
-    <IonReactRouter>
-      <IonTabs>
-        
-        <IonRouterOutlet>
-          {/*
-          Use the render method to reduce the number of renders your component will have due to a route change.
-
-          Use the component prop when your component depends on the RouterComponentProps passed in automatically.
-        */}
-          <Route path="accueils" render={() => <Accueil />} exact={true} />
-          {/* <Route path="/library" render={() => <LibraryPage />} exact={true} /> */}
-          {/* <Route path="/search" render={() => <SearchPage />} exact={true} /> */} 
-        </IonRouterOutlet>
-
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/accueils">
-            <IonIcon icon={home} />
-            <IonLabel>Accueil</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="radio" href='/creer_annonce'>
-            <IonIcon icon={add} />
-            <IonLabel>Creer un annonce</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="library" href="/library">
-            <IonIcon icon={mail} />
-            <IonLabel>Message</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="search" href="/search">
-            <IonIcon icon={power} />
-            <IonLabel>Deconnection</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
+    <div></div>
   );
 }
 export default FooterTab;
