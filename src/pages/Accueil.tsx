@@ -12,6 +12,8 @@ import FooterTab from '../components/FooterTab';
 import { searchCircle } from 'ionicons/icons';
 
 const Accueil: React.FC = () => {
+
+  // var and effect
   const [searchValue, setSearchValue] = useState<string>('');
   useEffect(() => {
     setSearchValue('Aucun annonce');
@@ -24,7 +26,7 @@ const Accueil: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <br />
+          <div className='margin-top-search-bar' ></div>
           <IonSearchbar animated={true} searchIcon={searchCircle} placeholder="Recherche..." onIonInput={searchAnnonceAction}></IonSearchbar>
         </IonToolbar>
       </IonHeader>

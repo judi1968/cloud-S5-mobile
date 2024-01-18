@@ -1,6 +1,7 @@
 import { IonContent,  IonHeader,  IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import Formulaire from '../components/Login/FormulaireLogin';
 import FooterTab from '../components/FooterTab';
+import FormulaireCreerAnnonce from '../components/CreerAnnonce/FormulaireCreerAnnonce';
 
 const CreerAnnonce: React.FC = () => {
   return (
@@ -12,16 +13,7 @@ const CreerAnnonce: React.FC = () => {
       </IonHeader>
 
       <IonContent>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-        }}
-      >
-        Vous devez vous connecter
-      </div>
+        <FormulaireCreerAnnonce></FormulaireCreerAnnonce>
       </IonContent>
     </IonPage>
   );
