@@ -1,0 +1,16 @@
+.btn-control {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: auto;    
+  }
+.btn-cancel{
+    padding: 7px;
+    background-color: rgb(112, 112, 112);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+}

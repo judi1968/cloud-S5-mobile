@@ -1,4 +1,4 @@
-import { Redirect, Route, useLocation } from 'react-router-dom';
+import { Redirect, Route, useHistory, useLocation } from 'react-router-dom';
 import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact, useIonRouter } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
@@ -21,16 +21,22 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 // import './theme/variables.css';
 
-import { library, playCircle, radio, search } from 'ionicons/icons';
+import { library, list, mail, pencil, playCircle, power, radio, search } from 'ionicons/icons';
 import Accueil from './Accueil';
 import CreerAnnonce from './CreerAnnonce';
 import CreerCompte from './CreerCompte';
 import Login from './Login';
+import Message from './Message';
 
 
 setupIonicReact();
 
 const RooterPage: React.FC = () => {
+    const history = useHistory();
+
+    const handleLoginClick = () =>{
+        history.push('/');
+    }
   return(
   
   <IonApp>
@@ -40,29 +46,28 @@ const RooterPage: React.FC = () => {
           <Redirect exact path="/rooter_page" to="/home" />
   
           <Route path="/home" render={() => <Accueil />} exact={true} />
-          <Route path="/login" render={() => <Login />} exact={true} />
-          <Route path="/creer_compte" render={() => <CreerCompte />} exact={true} />
+          <Route path="/message" render={() => <Message />} exact={true} />
           <Route path="/creer_annonce" render={() => <CreerAnnonce />} exact={true} />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
-            <IonIcon icon={playCircle} />
-            <IonLabel>Listen now</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="radio" href="/radio">
-            <IonIcon icon={radio} />
-            <IonLabel>Radio</IonLabel>
+            <IonIcon icon={list} />
+            <IonLabel>Annonces</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="creer_annonce" href="/creer_annonce">
-            <IonIcon icon={library} />
-            <IonLabel>Creer annonce</IonLabel>
+            <IonIcon icon={pencil} />
+            <IonLabel>Creer un annonce</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="login" href="/login">
-            <IonIcon icon={search} />
+          <IonTabButton tab="message" href="/message">
+            <IonIcon icon={mail} />
+            <IonLabel>Message</IonLabel>
+          </IonTabButton>
+
+          <IonTabButton tab="login" onClick={handleLoginClick}>
+            <IonIcon icon={power} />
             <IonLabel>Login</IonLabel>
           </IonTabButton>
         </IonTabBar>

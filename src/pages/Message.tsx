@@ -2,12 +2,12 @@ import { IonContent,  IonFooter,  IonHeader,  IonPage, IonTitle, IonToolbar } fr
 import Formulaire from '../components/Login/FormulaireLogin';
 import FooterTab from '../components/FooterTab';
 
-const Accueil: React.FC = () => {
+const Message: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Liste des annonces</IonTitle>
+          <IonTitle>Message</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -20,11 +20,11 @@ const Accueil: React.FC = () => {
           height: '100%',
         }}
       >
-        Aucun annonce
+        Aucun mesage
       </div>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Accueil;
+export default Message;

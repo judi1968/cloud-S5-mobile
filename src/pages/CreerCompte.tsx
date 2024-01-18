@@ -1,5 +1,5 @@
 import { IonContent,  IonPage } from '@ionic/react';
-import './assets/css/Login.css';
+import "./assets/css/CreerCompte.css"
 import FormulaireCreerCompte from '../components/Login/FormulaireCreerCompte';
 
 const CreerCompte: React.FC = () => {
@@ -7,10 +7,10 @@ const CreerCompte: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <FormulaireCreerCompte />
-        <center>
+        <div className='btn-control'>
             <br />
-            <a href="/login">Retour</a>
-        </center>
+            <a href="/login" className='btn-cancel'>Retour</a>
+        </div>
       </IonContent>
     </IonPage>
   );
