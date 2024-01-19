@@ -17,7 +17,13 @@ const FormulaireCreerAnnonce: React.FC = () => {
   };
 
   const handlePrixChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrix(e.target.value);
+    let value = e.target.value;
+    
+    // Assurez-vous que la valeur reste entre 0 et 100
+    if (value === '' || (parseFloat(value) >= 0)) {
+      setPrix(value);
+    }
+    
   };
 
   const handleCommissionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,74 +53,64 @@ const FormulaireCreerAnnonce: React.FC = () => {
 
   return (
     <div className="container-formulaire-creer-annonce mt-5">
-      <center>
-        <h1>Créer votre compte</h1>
-      </center>
+      
       <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit}>
-        <div className="col-md-4">
-          <label htmlFor="marque" className="form-label">Marque de la voiture</label>
-          <select
-            className="form-select"
-            id="marque"
-            value={marque}
-            onChange={handleMarqueChange}
-            required
-          >
-            <option value="">Choisir...</option>
-            {/* Ajoutez d'autres options de marque selon vos besoins */}
-            <option value="Toyota">Toyota</option>
-            <option value="Honda">Honda</option>
-            {/* ... */}
+      <div className="col-md">
+        <div className="form-floating">
+          <select 
+          id="marque"
+          value={marque}
+          onChange={handleMarqueChange}
+          required
+          className="form-select" itemID="floatingSelectGrid" aria-label="Floating label select example">
+            <option selected>Audi</option>
+            <option value="2">Toyota</option>
+            <option value="3">Mercedes</option>
           </select>
+          <label htmlFor="floatingSelectGrid">Marque</label>
         </div>
-        <div className="col-md-4">
-          <label htmlFor="type" className="form-label">Type</label>
-          <select
-            className="form-select"
-            id="type"
-            value={type}
-            onChange={handleTypeChange}
-            required
-          >
-            <option value="">Choisir...</option>
-            {/* Ajoutez d'autres options de type selon vos besoins */}
-            <option value="Sedan">Sedan</option>
-            <option value="SUV">SUV</option>
-            {/* ... */}
+      </div>
+      <div className="col-md">
+        <div className="form-floating">
+          <select 
+          className="form-select"
+          id="marque"
+          value={type}
+          onChange={handleTypeChange}
+          required
+          itemID="floatingSelectGrid" aria-label="Floating label select example">
+            <option selected>Q5</option>
+            <option value="2">Q6</option>
+            <option value="3">Q7</option>
           </select>
+          <label htmlFor="floatingSelectGrid">Type</label>
         </div>
-        <div className="col-md-4">
-          <label htmlFor="prix" className="form-label">Prix</label>
-          <input
-            type="number"
+      </div>
+      <div className="form-floating">
+        <input type="number"
             className="form-control"
             id="prix"
             value={prix}
             onChange={handlePrixChange}
-            required
-          />
-        </div>
-        <div className="col-md-4">
-          <label htmlFor="commission" className="form-label">Commission proposée (en %)</label>
-          <input
-            type="number"
+            required  itemID="floatingPrice" placeholder="Prix"/>
+        <label htmlFor="floatingPrice">Prix</label>
+      </div>
+      <div className="form-floating mb-3">
+        <input type="number"
             className="form-control"
             id="commission"
             value={commission}
             onChange={handleCommissionChange}
-            required
-          />
-          <small className="text-muted">Veuillez entrer un nombre entre 0 et 100</small>
-        </div>
-        <div className="col-12">
-          <label htmlFor="description" className="form-label">Description</label>
-          <textarea
-            className="form-control"
+            required itemID="floatingInput" placeholder="entre 0 a 100"/>
+        <label htmlFor="floatingInput">Commission</label>
+      </div>
+      <div className="form-floating">
+        <textarea className="form-control"
             id="description"
             value={description}
-            onChange={handleDescriptionChange}
-          />
-        </div>
+            onChange={handleDescriptionChange} placeholder="Mettez ici le description de votre vente" itemID="floatingTextarea2" ></textarea>
+        <label htmlFor="floatingTextarea2">Description</label>
+      </div>
         <div className="col-12">
           <button className="btn btn-primary" type="submit">Soumettre le formulaire</button>
         </div>
