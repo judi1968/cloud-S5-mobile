@@ -29,7 +29,7 @@ const Formulaire: React.FC = () => {
       const response = await axios.post(
         `${API_DOMAIN}/authentification_client`,
         {
-          username,
+          'username':username,
           password,
         },
         {
@@ -41,6 +41,13 @@ const Formulaire: React.FC = () => {
 
       if (response.data.status === 200) {
         // Authentification réussie, naviguez vers la page souhaitée
+        localStorage.setItem("token", response.data.token);
+        // Récupérez le token du localStorage
+        const storedToken = localStorage.getItem("token");
+
+        // Utilisez le token comme nécessaire
+        console.log("Token récupéré :", storedToken);
+
         history.push('/rooter_page');
       }else{
         // Gestion des erreurs d'authentification
