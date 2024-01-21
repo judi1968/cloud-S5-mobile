@@ -5,7 +5,7 @@ import './../assets/css/Formulaire.css';
 import axios from 'axios';
 
 const FormulaireCreerCompte: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [name, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,8 +18,8 @@ const FormulaireCreerCompte: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/votre-endpoint', {
-        username,
+      const response = await axios.post('https://cloud-s5-metier-production.up.railway.app', {
+        name,
         password,
       });
       console.log('Réponse du serveur:', response.data);
