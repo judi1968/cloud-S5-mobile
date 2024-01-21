@@ -7,6 +7,7 @@ import axios from 'axios';
 const FormulaireCreerCompte: React.FC = () => {
   const [name, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -32,9 +33,14 @@ const FormulaireCreerCompte: React.FC = () => {
           },
         }
       );
-      console.log('Réponse du serveur:', response.data);
+
+      setMessage(`Succès: ${response.data}`);
     } catch (error) {
-      console.error('Erreur lors de la requête:', error);
+      if (error.message === 'Network Error') {
+        setMessage('Connection échouée');
+      } else {
+        setMessage(`Erreur: ${error.message}`);
+      }
     }
   };
 
@@ -43,6 +49,11 @@ const FormulaireCreerCompte: React.FC = () => {
       <center>
         <h1>Créer votre compte</h1>
       </center>
+      {message && (
+        <div className={message.includes('Succès') ? 'alert alert-success' : 'alert alert-danger'}>
+          {message}
+        </div>
+      )}
       <form>
         <div>
           <div className="form-floating mb-3">
