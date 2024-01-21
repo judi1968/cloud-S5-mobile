@@ -36,8 +36,11 @@ const FormulaireCreerCompte: React.FC = () => {
           },
         }
       );
-
-      setMessage(`Succès: ${response.data.titre}`);
+      if (response.data.status===500) {
+        setMessage(`${response.data.message}`);
+      }else{
+        setMessage(`Succès: ${response.data.titre}`);
+      }
     } catch (error:any) {
       if (error.message === 'Network Error') {
         setMessage('Connection échouée');
