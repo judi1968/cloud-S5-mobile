@@ -10,6 +10,8 @@ const Formulaire: React.FC = () => {
   const history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -21,6 +23,9 @@ const Formulaire: React.FC = () => {
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
+      setErrorMessage('');
+
       const response = await axios.post(
         `${API_DOMAIN}/authentification_client`,
         {
@@ -37,12 +42,15 @@ const Formulaire: React.FC = () => {
       if (response.data.status === 200) {
         // Authentification réussie, naviguez vers la page souhaitée
         history.push('/rooter_page');
-      } else {
+      }else{
         // Gestion des erreurs d'authentification
-        console.error('Échec de l\'authentification:', response.data.message);
+        setErrorMessage(response.data.message);
       }
     } catch (error: any) {
-      console.error('Erreur lors de la requête:', error.message);
+      // Gestion des erreurs réseau ou autres
+      setErrorMessage(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -77,11 +85,17 @@ const Formulaire: React.FC = () => {
             type="button"
             className="col-12 btn btn-primary"
             onClick={handleLogin}
+            disabled={loading}
           >
-            Connexion
+            {loading ? 'Connexion en cours...' : 'Connexion'}
           </button>
         </div>
         <br />
+        {errorMessage && (
+          <div className="alert alert-danger" role="alert">
+            {errorMessage}
+          </div>
+        )}
         <p>
           Si vous n'avez pas de compte, cliquez sur{' '}
           <a href="/creer_compte" className="">
