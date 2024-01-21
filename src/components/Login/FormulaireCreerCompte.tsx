@@ -18,10 +18,20 @@ const FormulaireCreerCompte: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://cloud-s5-metier-production.up.railway.app', {
-        name,
-        password,
-      });
+      const response = await axios.post(
+        'https://cloud-s5-metier-production.up.railway.app/create_compte_client',
+        {
+          name,
+          password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Ajoutez les en-têtes CORS nécessaires ici, par exemple :
+            // 'Access-Control-Allow-Origin': 'http://localhost:8100',
+          },
+        }
+      );
       console.log('Réponse du serveur:', response.data);
     } catch (error) {
       console.error('Erreur lors de la requête:', error);
@@ -57,7 +67,11 @@ const FormulaireCreerCompte: React.FC = () => {
           </div>
         </div>
         <div className="text-center">
-          <button type="button" className="btn btn-success col-12" onClick={handleLogin}>
+          <button
+            type="button"
+            className="btn btn-success col-12"
+            onClick={handleLogin}
+          >
             Créer
           </button>
         </div>
