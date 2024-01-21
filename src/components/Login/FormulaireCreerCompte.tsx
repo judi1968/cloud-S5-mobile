@@ -1,8 +1,9 @@
 // Formulaire.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../assets/css/Formulaire.css';
 import axios from 'axios';
+import API_DOMAIN from './../../config/config'; // Importez la valeur du domaine depuis config.js
 
 const FormulaireCreerCompte: React.FC = () => {
   const [name, setUsername] = useState('');
@@ -23,7 +24,7 @@ const FormulaireCreerCompte: React.FC = () => {
       setLoading(true);
       setMessage('');
       const response = await axios.post(
-        'https://cloud-s5-metier-production.up.railway.app/create_compte_client',
+        `${API_DOMAIN}/create_compte_client`,
         {
           name,
           password,
@@ -36,9 +37,9 @@ const FormulaireCreerCompte: React.FC = () => {
           },
         }
       );
-      if (response.data.status===500) {
+      if (response.data.status === 500) {
         setMessage(`${response.data.message}`);
-      }else{
+      } else {
         setMessage(`Succès: ${response.data.titre}`);
       }
     } catch (error:any) {
@@ -47,24 +48,10 @@ const FormulaireCreerCompte: React.FC = () => {
       } else {
         setMessage(`Erreur: ${error.message}`);
       }
-    } finally {
-      setLoading(false);
+    } finally{
+      setLoading(false)
     }
   };
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (loading) {
-      timeout = setTimeout(() => {
-        setMessage('L\'envoi de la requête a dépassé le délai.');
-        setLoading(false);
-      }, 60000); // 1 minute
-    }
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [loading]);
 
   return (
     <div className="container mt-5">
@@ -73,11 +60,11 @@ const FormulaireCreerCompte: React.FC = () => {
       </center>
       <form>
         <div>
-          {message && (
-            <div className={message.includes('Succès') ? 'alert alert-success' : 'alert alert-danger'}>
-              {message}
-            </div>
-          )}
+            {message && (
+              <div className={message.includes('Succès') ? 'alert alert-success' : 'alert alert-danger'}>
+                {message}
+              </div>
+            )}
           <div className="form-floating mb-3">
             <input
               type="email"
@@ -104,9 +91,8 @@ const FormulaireCreerCompte: React.FC = () => {
             type="button"
             className="btn btn-success col-12"
             onClick={handleLogin}
-            disabled={loading}
           >
-            {loading ? 'Création en cours...' : 'Créer'}
+           {loading ? 'Création en cours...' : 'Créer'}
           </button>
         </div>
       </form>
