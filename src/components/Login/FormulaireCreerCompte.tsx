@@ -34,8 +34,8 @@ const FormulaireCreerCompte: React.FC = () => {
         }
       );
 
-      setMessage(`Succès: ${response.data}`);
-    } catch (error) {
+      setMessage(`Succès: ${response.data.titre}`);
+    } catch (error:any) {
       if (error.message === 'Network Error') {
         setMessage('Connection échouée');
       } else {
@@ -49,13 +49,13 @@ const FormulaireCreerCompte: React.FC = () => {
       <center>
         <h1>Créer votre compte</h1>
       </center>
-      {message && (
-        <div className={message.includes('Succès') ? 'alert alert-success' : 'alert alert-danger'}>
-          {message}
-        </div>
-      )}
       <form>
         <div>
+            {message && (
+              <div className={message.includes('Succès') ? 'alert alert-success' : 'alert alert-danger'}>
+                {message}
+              </div>
+            )}
           <div className="form-floating mb-3">
             <input
               type="email"
@@ -68,7 +68,7 @@ const FormulaireCreerCompte: React.FC = () => {
           </div>
           <div className="form-floating">
             <input
-              type="password"
+              type="text"
               className="form-control"
               id="floatingPassword"
               placeholder="Password"
