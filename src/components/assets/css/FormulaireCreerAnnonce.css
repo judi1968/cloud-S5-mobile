@@ -51,4 +51,8 @@
  .container-formulaire-creer-annonce button:hover {
     background-color: #0056b3;
   }
+
+  .container-formulaire-creer-annonce .btn-next {
+    float: right;
+  }
   
