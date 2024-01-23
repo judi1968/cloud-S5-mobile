@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../assets/css/FormulaireCreerAnnonce.css'
 import { IonIcon } from '@ionic/react';
 import { chevronForward, handRight, star } from 'ionicons/icons';
 
 const FormulaireCreerAnnonce: React.FC = () => {
+    const [marqueData, setMarqueData] = useState<any>([]);
+
+
     const [marque, setMarque] = useState('');
     const [categorie, setCategorie] = useState('');
     const [typeCarburant, setTypeCarburant] = useState('');
@@ -14,6 +17,31 @@ const FormulaireCreerAnnonce: React.FC = () => {
     const [prix, setPrix] = useState<number | string>('');
     const [commission, setCommission] = useState<number | string>('');
     const [description, setDescription] = useState('');
+
+  // initialisation des donnes 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/marques', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.object);
+            setMarqueData(data.object);
+          }
+        
+      } catch (error) {
+        console.error('Erreur lors de la demande au serveur:', error);
+      }
+    };
+  
+    fetchData();
+  
+  }, []);
 
   const handleMarqueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setMarque(e.target.value);
@@ -56,8 +84,9 @@ const FormulaireCreerAnnonce: React.FC = () => {
           required
           className="form-select" itemID="floatingSelectGrid" aria-label="Floating label select example">
             <option selected>Audi</option>
-            <option value="2">Toyota</option>
-            <option value="3">Mercedes</option>
+             {marqueData?.map((element:any) => (
+              <option value={element.id}>{element.nom}</option>
+            ))} 
           </select>
           <label htmlFor="floatingSelectGrid">Marque</label>
         </div>
