@@ -4,8 +4,10 @@ import './../assets/css/FormulaireCreerAnnonce.css'
 import { IonIcon } from '@ionic/react';
 import { chevronForward, handRight, star } from 'ionicons/icons';
 import API_DOMAIN from '../../config/config';
+import { useHistory } from 'react-router';
 
 const FormulaireCreerAnnonce: React.FC = () => {
+    const history = useHistory();
     const [marqueData, setMarqueData] = useState<any>([]);
     const [categorieData, setCategorieData] = useState<any>([]);
     const [typeCarburantData, setTypeCarburantData] = useState<any>([]);
@@ -182,6 +184,8 @@ const FormulaireCreerAnnonce: React.FC = () => {
       freinage.length==0
       ) {
         setFormIncomplet(true)
+    }else{
+      history.push('/formulaireTwo');
     }
   };
 
@@ -197,7 +201,7 @@ const FormulaireCreerAnnonce: React.FC = () => {
   return (
     <div className="container-formulaire-creer-annonce mt-5">
       <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit}>
-      <h1>Ajouter les elements de voiture</h1>
+      <h1>Etape 1 : Ajouter les elements de voiture</h1>
       {formIncomplete ? 
       <center>
         <p style={errorStyle}> information incomplete </p> 

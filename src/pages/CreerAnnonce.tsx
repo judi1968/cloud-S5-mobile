@@ -1,20 +1,32 @@
-import { IonContent,  IonHeader,  IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent,  IonHeader,  IonPage, IonRouterOutlet, IonTitle, IonToolbar } from '@ionic/react';
 import Formulaire from '../components/Login/FormulaireLogin';
 import FooterTab from '../components/FooterTab';
 import FormulaireCreerAnnonce from '../components/CreerAnnonce/FormulaireCreerAnnonce';
+import { IonReactRouter } from '@ionic/react-router';
+import { Redirect, Route } from 'react-router';
+import FormulaireCreerAnnonce2 from '../components/CreerAnnonce/FormulaireCreerAnnonce2';
 
 const CreerAnnonce: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Creation annonce</IonTitle>
+          <IonTitle>Creer annonce</IonTitle>
         </IonToolbar>
       </IonHeader>
-
-      <IonContent>
-        <FormulaireCreerAnnonce></FormulaireCreerAnnonce>
-      </IonContent>
+      <IonReactRouter>
+      <IonRouterOutlet>
+        <Route exact path="/formulaireOne">
+          <FormulaireCreerAnnonce />
+        </Route>
+        <Route exact path="/formulaireTwo">
+          <FormulaireCreerAnnonce2 />
+        </Route>
+        <Route exact path="/creer_annonce">
+          <Redirect to="/formulaireOne" />
+        </Route>
+      </IonRouterOutlet>
+    </IonReactRouter>
     </IonPage>
   );
 };
