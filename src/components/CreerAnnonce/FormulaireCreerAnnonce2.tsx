@@ -11,6 +11,9 @@ const FormulaireCreerAnnonce2: React.FC = () => {
   const handlePrevEtape = () => {
     history.push("/formulaireOne");
   }
+  const handleNextEtape = () => {
+    history.push("formulaireThree")
+  }
   const [equipementInterne,setEquipementInterne] = useState<any>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -53,8 +56,8 @@ const FormulaireCreerAnnonce2: React.FC = () => {
 
     </div>
       <div className="col-12">
-          <button className="btn btn-primary btn-next" onClick={handlePrevEtape}>Precedent     <IonIcon icon={chevronBackSharp} /></button>
-          <button className="btn btn-primary btn-next" type="submit">Suivant     <IonIcon icon={chevronForward} /></button>
+          <button className="btn btn-primary btn-prev" onClick={handlePrevEtape}> <IonIcon icon={chevronBackSharp} />Precedent</button>
+          <button className="btn btn-primary btn-next" type="submit" onClick={handleNextEtape}>Suivant<IonIcon icon={chevronForward} /></button>
       </div>
     </form>
   </div>

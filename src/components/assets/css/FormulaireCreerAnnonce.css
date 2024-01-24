@@ -59,4 +59,9 @@
   .container-formulaire-creer-annonce .btn-next {
     float: right;
   }
-  
+  .container-formulaire-creer-annonce-2 .btn-prev {
+    float: left;
+  }
+  .container-formulaire-creer-annonce-2 .btn-next {
+    float: right;
+  }

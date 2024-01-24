@@ -145,29 +145,35 @@ const FormulaireCreerAnnonce: React.FC = () => {
   const handleMarqueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setMarque(e.target.value);
     setFormIncomplet(false);
-
+    setEtatSelectMarque(true);
   };
 
   const handleCategorieChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategorie(e.target.value);
     setFormIncomplet(false);
-
+    setEtatSelectCategorie(true);
   };
   const handleTypeCarburantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTypeCarburant(e.target.value);
     setFormIncomplet(false);
-
+    setEtatSelectTypeCarburant(true);
   };
   const handleTransmissionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTransmission(e.target.value);
     setFormIncomplet(false);
-
+    setEtatSelectTransmission(true)
   };
   const handleFreinageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFreinage(e.target.value);
     setFormIncomplet(false);
-
+    setEtatSelectFreinage(true);
   };
+
+  const [etatSelectMarque,setEtatSelectMarque] = useState(true);
+  const [etatSelectCategorie,setEtatSelectCategorie] = useState(true);
+  const [etatSelectTypeCarburant,setEtatSelectTypeCarburant] = useState(true);
+  const [etatSelectTransmission,setEtatSelectTransmission] = useState(true);
+  const [etatSelectFreinage,setEtatSelectFreinage] = useState(true);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -179,10 +185,15 @@ const FormulaireCreerAnnonce: React.FC = () => {
     console.log('Freinage', freinage);
     if (marque.length==0 ||
       categorie.length==0 ||
-      categorie.length==0 ||
+      typeCarburant.length==0 ||
       transmission.length==0 ||
       freinage.length==0
       ) {
+        marque.length==0?setEtatSelectMarque(false):''
+        categorie.length==0?setEtatSelectCategorie(false):''
+        typeCarburant.length==0?setEtatSelectTypeCarburant(false):''
+        transmission.length==0?setEtatSelectTransmission(false):''
+        freinage.length==0? setEtatSelectFreinage(false):''
         setFormIncomplet(true)
     }else{
       history.push('/formulaireTwo');
@@ -192,12 +203,11 @@ const FormulaireCreerAnnonce: React.FC = () => {
   const [formIncomplete,setFormIncomplet] = useState(false);
 
   const errorStyle = {
-    padding:'5px',
+    padding:'10px',
     color:'red',
     borderRadius:'5px',
     border:'2px solid red'
   }
-
   return (
     <div className="container-formulaire-creer-annonce mt-5">
       <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit}>
@@ -217,7 +227,8 @@ const FormulaireCreerAnnonce: React.FC = () => {
           value={marque}
           onChange={handleMarqueChange}
           required
-          className="form-select" itemID="floatingSelectGrid" aria-label="Floating label select example">
+          className={etatSelectMarque ? "form-select" : "form-select is-invalid" } itemID="floatingSelectGrid" aria-label="Floating label select example">
+              <option value="">Choisir ...</option>
              {marqueData?.map((element:any) => (
               <option value={element.id}>{element.nom}</option>
             ))} 
@@ -228,12 +239,13 @@ const FormulaireCreerAnnonce: React.FC = () => {
       <div className="col-md">
         <div className="form-floating">
           <select 
-          className="form-select"
+          className={etatSelectCategorie ? "form-select" : "form-select is-invalid" }
           id="marque"
           value={categorie}
           onChange={handleCategorieChange}
           required
           itemID="floatingSelectGrid" aria-label="Floating label select example">
+            <option value="">Choisir ...</option>
             {categorieData?.map((element:any) => (
               <option value={element.id}>{element.nom}</option>
             ))} 
@@ -244,12 +256,13 @@ const FormulaireCreerAnnonce: React.FC = () => {
       <div className="col-md">
         <div className="form-floating">
           <select 
-          className="form-select"
+          className={etatSelectTypeCarburant ? "form-select" : "form-select is-invalid" }
           id="marque"
           value={typeCarburant}
           onChange={handleTypeCarburantChange}
           required
           itemID="floatingSelectGrid" aria-label="Floating label select example">
+            <option value="">Choisir ...</option>
             {typeCarburantData?.map((element:any) => (
               <option value={element.id}>{element.nom}</option>
             ))} 
@@ -260,12 +273,13 @@ const FormulaireCreerAnnonce: React.FC = () => {
       <div className="col-md">
         <div className="form-floating">
           <select 
-          className="form-select"
+          className={etatSelectTransmission ? "form-select" : "form-select is-invalid" }
           id="marque"
           value={transmission}
           onChange={handleTransmissionChange}
           required
           itemID="floatingSelectGrid" aria-label="Floating label select example">
+              <option value="">Choisir ...</option>
             {transmissonData?.map((element:any) => (
               <option value={element.id}>{element.nom}</option>
             ))}
@@ -276,12 +290,13 @@ const FormulaireCreerAnnonce: React.FC = () => {
       <div className="col-md">
         <div className="form-floating">
           <select 
-          className="form-select"
+          className={etatSelectFreinage ? "form-select" : "form-select is-invalid" }
           id="marque"
           value={freinage}
           onChange={handleFreinageChange}
           required
           itemID="floatingSelectGrid" aria-label="Floating label select example">
+            <option value="">Choisir ...</option>
             {freinageData?.map((element:any) => (
               <option value={element.id}>{element.nom}</option>
             ))}
