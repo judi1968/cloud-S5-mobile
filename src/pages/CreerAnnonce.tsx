@@ -6,6 +6,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router';
 import FormulaireCreerAnnonce2 from '../components/CreerAnnonce/FormulaireCreerAnnonce2';
 import FormulaireCreerAnnonce3 from '../components/CreerAnnonce/FormulaireCreerAnnonce3';
+import FinishCreateAndValidateAnnonce from '../components/CreerAnnonce/FinishCreateAndValidateAnnonce';
 
 const CreerAnnonce: React.FC = () => {
   return (
@@ -26,9 +27,13 @@ const CreerAnnonce: React.FC = () => {
         <Route exact path="/formulaireThree">
           <FormulaireCreerAnnonce3 />
         </Route>
+        <Route exact path="/finishEtapeCreationAnnonce">
+          <FinishCreateAndValidateAnnonce />
+        </Route>
         <Route exact path="/creer_annonce">
           <Redirect to="/formulaireOne" />
         </Route>
+        
       </IonRouterOutlet>
     </IonReactRouter>
     </IonPage>

@@ -6,7 +6,7 @@ import { chevronBackSharp, chevronForward, handLeft, handRight, star } from 'ion
 import { useHistory } from 'react-router';
 import API_DOMAIN from '../../config/config';
 
-const FormulaireCreerAnnonce3: React.FC = () => {
+const FinishCreateAndValidateAnnonce: React.FC = () => {
   const history = useHistory();
   const [commissionData,setCommissionData] = useState(0);
   const [commission,setCommission] = useState<number>(0);
@@ -47,15 +47,12 @@ const FormulaireCreerAnnonce3: React.FC = () => {
   const handlePrevEtape = () => {
     history.push("/formulaireTwo");
   }
-  const handleNextEtape = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Empêche le rafraîchissement de la page par défaut
-
+  const handleNextEtape = () => {
     if (priceAnnonce==0) {
       setEtatPrix(true)
     }else{
       localStorage.setItem('commission',commissionData+"")
       localStorage.setItem('prix',priceAnnonce+"")
-      history.push("/finishEtapeCreationAnnonce")
     }
   }
   const handleMontantChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,25 +64,9 @@ const FormulaireCreerAnnonce3: React.FC = () => {
   }
   return (
     <div className="container-formulaire-creer-annonce-2 mt-5">
-    <form className="row g-3 needs-validation" noValidate onSubmit={handleNextEtape}>
-    <h1>Etape 3 : Entrer le montant du vente</h1>
-    
-    <div className="col-md">
-    <div className="form-floating">
-    <div className="form-floating mb-3">
-  <input type="number" className={etatPrix?'form-control is-invalid':'form-control'} id="floatingInput" onChange={handleMontantChange} placeholder=""/>
-  <label form="floatingInput" >Montant en ariary</label>
-</div>
-    </div>
-    <p>{commission==0?'Pas de commission':'Commission de ce prix : '.concat(convertirEnMontant(commissionData))}</p>
-    </div>
-      <div className="col-12">
-          <button className="btn btn-primary btn-prev" onClick={handlePrevEtape}> <IonIcon icon={chevronBackSharp} />Precedent</button>
-          <button className="btn btn-primary btn-next" type='submit'>Suivant<IonIcon icon={chevronForward} /></button>
-      </div>
-    </form>
+        <h1>Fin de creation</h1>
   </div>
   );
 };
 
-export default FormulaireCreerAnnonce3;
+export default FinishCreateAndValidateAnnonce;
