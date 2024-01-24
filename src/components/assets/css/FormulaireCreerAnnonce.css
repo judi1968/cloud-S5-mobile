@@ -15,7 +15,11 @@
     max-width: 300px;
     margin: auto;
   }
-  
+  .container-formulaire-creer-annonce-2 form {
+    flex-direction: column;
+    max-width: 300px;
+    margin: auto;
+  }
  .container-formulaire-creer-annonce .form-group {
     margin-bottom: 20px;
   }
