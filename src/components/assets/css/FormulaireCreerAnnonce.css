@@ -28,6 +28,11 @@
     max-width: 300px;
     margin: auto;
   }
+  .container-formulaire-creer-annonce-3 {
+    margin-top:10px ;
+    flex-direction: column;
+    margin: 3%;
+  }
  .container-formulaire-creer-annonce .form-group {
     margin-bottom: 20px;
   }
@@ -73,3 +78,15 @@
   .container-formulaire-creer-annonce-2 .btn-next {
     float: right;
   }
+  .container-formulaire-creer-annonce-3 .btn-prev {
+    float: left;
+  }
+  .container-formulaire-creer-annonce-3 .btn-next {
+    float: right;
+  }
+  .container-formulaire-creer-annonce-3 .container-list-element-annonce{
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+ 

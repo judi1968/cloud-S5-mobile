@@ -40,7 +40,7 @@ const FormulaireCreerAnnonce2: React.FC = () => {
       fetchData();
     }, []);
     useEffect(() => {
-      const storedCheckedItems = localStorage.getItem('checkedItems');
+      const storedCheckedItems = localStorage.getItem('equipementInterne');
       const parsedCheckedItems = storedCheckedItems ? JSON.parse(storedCheckedItems) : [];
 
       setCheckedItems(parsedCheckedItems);
@@ -54,7 +54,7 @@ const FormulaireCreerAnnonce2: React.FC = () => {
     setCheckedItems(updatedCheckedItems);
 
     // Stocker les éléments cochés dans le stockage local
-    localStorage.setItem('checkedItems', JSON.stringify(updatedCheckedItems));
+    localStorage.setItem('equipementInterne', JSON.stringify(updatedCheckedItems));
   };
 
   return (
