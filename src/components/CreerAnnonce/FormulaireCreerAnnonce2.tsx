@@ -68,14 +68,14 @@ const FormulaireCreerAnnonce2: React.FC = () => {
       equipementInterne?.map((element: any, index: number) => ( 
         <div className="form-check" key={element.id}>
           <input
-            className="form-check-input col-3"
+            className="form-check-input"
             type="checkbox"
             value={element.id}
             id={`flexCheckDefault_${index}`}
             checked={checkedItems.includes(element.id)}
             onChange={() => handleCheckboxChange(element.id)}
           ></input>
-          <label className="form-check-label col-9" htmlFor={`flexCheckDefault_${index}`}>
+          <label className="form-check-label" htmlFor={`flexCheckDefault_${index}`}>
             {element.nom}
           </label>
         </div>

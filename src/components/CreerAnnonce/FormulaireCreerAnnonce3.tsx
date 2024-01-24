@@ -63,7 +63,10 @@ const FormulaireCreerAnnonce3: React.FC = () => {
     setCommission(parseFloat(e.target.value))
     fetchCommissionData()
     setPriceAnnonce(parseFloat(e.target.value))
-
+    if (parseFloat(e.target.value)==null || isNaN(parseFloat(e.target.value))) {
+      setCommission(0)
+      setPriceAnnonce(0)
+    }
   }
   return (
     <IonContent>
