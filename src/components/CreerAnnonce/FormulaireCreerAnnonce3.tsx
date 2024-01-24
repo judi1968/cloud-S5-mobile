@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../assets/css/FormulaireCreerAnnonce.css'
-import { IonIcon } from '@ionic/react';
+import { IonContent, IonIcon } from '@ionic/react';
 import { chevronBackSharp, chevronForward, handLeft, handRight, star } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 import API_DOMAIN from '../../config/config';
@@ -66,6 +66,7 @@ const FormulaireCreerAnnonce3: React.FC = () => {
 
   }
   return (
+    <IonContent>
     <div className="container-formulaire-creer-annonce-2 mt-5">
     <form className="row g-3 needs-validation" noValidate onSubmit={handleNextEtape}>
     <h1>Etape 3 : Entrer le montant du vente</h1>
@@ -85,6 +86,7 @@ const FormulaireCreerAnnonce3: React.FC = () => {
       </div>
     </form>
   </div>
+  </IonContent>
   );
 };
 

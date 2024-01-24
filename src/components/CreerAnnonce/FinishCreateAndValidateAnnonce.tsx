@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../assets/css/FormulaireCreerAnnonce.css'
-import { IonIcon } from '@ionic/react';
+import { IonContent, IonIcon } from '@ionic/react';
 import { chevronBackSharp, chevronForward, handLeft, handRight, star } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 import API_DOMAIN from '../../config/config';
@@ -63,9 +63,11 @@ const FinishCreateAndValidateAnnonce: React.FC = () => {
 
   }
   return (
+    <IonContent>
     <div className="container-formulaire-creer-annonce-2 mt-5">
         <h1>Fin de creation</h1>
   </div>
+  </IonContent>
   );
 };
 

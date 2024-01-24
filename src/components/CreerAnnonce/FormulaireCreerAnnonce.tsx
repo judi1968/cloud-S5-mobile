@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../assets/css/FormulaireCreerAnnonce.css'
-import { IonIcon } from '@ionic/react';
+import { IonContent, IonIcon } from '@ionic/react';
 import { chevronForward, handRight, star } from 'ionicons/icons';
 import API_DOMAIN from '../../config/config';
 import { useHistory } from 'react-router';
@@ -205,6 +205,7 @@ const FormulaireCreerAnnonce: React.FC = () => {
     border:'2px solid red'
   }
   return (
+    <IonContent>
     <div className="container-formulaire-creer-annonce mt-5">
       <form className="row g-3 needs-validation" noValidate onSubmit={handleSubmit}>
       <h1>Etape 1 : Ajouter les elements de voiture</h1>
@@ -307,6 +308,7 @@ const FormulaireCreerAnnonce: React.FC = () => {
         </div>
       </form>
     </div>
+    </IonContent>
   );
 };
 
