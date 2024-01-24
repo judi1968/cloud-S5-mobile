@@ -37,7 +37,6 @@ const FormulaireCreerAnnonce: React.FC = () => {
         });
         if (response.ok) {
             const data = await response.json();
-            console.log(data.object);
             setMarqueData(data.object);
           }
         
@@ -60,7 +59,6 @@ const FormulaireCreerAnnonce: React.FC = () => {
         });
         if (response.ok) {
             const data = await response.json();
-            console.log(data.object);
             setCategorieData(data.object);
           }
         
@@ -83,7 +81,6 @@ const FormulaireCreerAnnonce: React.FC = () => {
         });
         if (response.ok) {
             const data = await response.json();
-            console.log(data.object);
             setTypeCarburantData(data.object);
           }
         
@@ -106,7 +103,6 @@ const FormulaireCreerAnnonce: React.FC = () => {
         });
         if (response.ok) {
             const data = await response.json();
-            console.log(data.object);
             setTransmissionData(data.object);
           }
         
@@ -129,7 +125,6 @@ const FormulaireCreerAnnonce: React.FC = () => {
         });
         if (response.ok) {
             const data = await response.json();
-            console.log(data.object);
             setFreinageData(data.object);
           }
         
@@ -177,12 +172,7 @@ const FormulaireCreerAnnonce: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Ajoutez votre logique de soumission ici
-    console.log('Marque:', marque);
-    console.log('Categorie:', categorie);
-    console.log('type carburant:',typeCarburant);
-    console.log('transmission:', transmission);
-    console.log('Freinage', freinage);
+    
     if (marque.length==0 ||
       categorie.length==0 ||
       typeCarburant.length==0 ||
@@ -196,6 +186,12 @@ const FormulaireCreerAnnonce: React.FC = () => {
         freinage.length==0? setEtatSelectFreinage(false):''
         setFormIncomplet(true)
     }else{
+      localStorage.setItem('createAnnonceMarque',marque)
+      localStorage.setItem('createAnnonceCategorie',categorie)
+      localStorage.setItem('createAnnonceTypeCarburant',typeCarburant)
+      localStorage.setItem('createAnnonceTransmission',transmission)
+      localStorage.setItem('createAnnonceFreinage',freinage)
+    
       history.push('/formulaireTwo');
     }
   };
@@ -230,7 +226,8 @@ const FormulaireCreerAnnonce: React.FC = () => {
           className={etatSelectMarque ? "form-select" : "form-select is-invalid" } itemID="floatingSelectGrid" aria-label="Floating label select example">
               <option value="">Choisir ...</option>
              {marqueData?.map((element:any) => (
-              <option value={element.id}>{element.nom}</option>
+              <option value={element.id} selected={element.id === localStorage.getItem("createAnnonceMarque")}>
+              {element.nom}</option>
             ))} 
           </select>
           <label htmlFor="floatingSelectGrid">Marque</label>

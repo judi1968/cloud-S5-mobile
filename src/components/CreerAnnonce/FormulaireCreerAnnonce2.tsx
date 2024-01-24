@@ -8,6 +8,8 @@ import API_DOMAIN from '../../config/config';
 
 const FormulaireCreerAnnonce2: React.FC = () => {
   const history = useHistory();
+  const [checkedItems, setCheckedItems] = useState<any>([]);
+
   const handlePrevEtape = () => {
     history.push("/formulaireOne");
   }
@@ -29,15 +31,32 @@ const FormulaireCreerAnnonce2: React.FC = () => {
             console.log(data.object);
             setEquipementInterne(data.object);
           }
-        
-      } catch (error) {
-        console.error('Erreur lors de la demande au serveur:', error);
-      }
-    };
-  
-    fetchData();
-  
+          
+        } catch (error) {
+          console.error('Erreur lors de la demande au serveur:', error);
+        }
+      };
+      
+      fetchData();
+    }, []);
+    useEffect(() => {
+      const storedCheckedItems = localStorage.getItem('checkedItems');
+      const parsedCheckedItems = storedCheckedItems ? JSON.parse(storedCheckedItems) : [];
+
+      setCheckedItems(parsedCheckedItems);
   }, []);
+  const handleCheckboxChange = (elementId: string) => {
+    // Mettre à jour le tableau des éléments cochés
+    const updatedCheckedItems: string[] = checkedItems.includes(elementId)
+  ? checkedItems.filter((id: string) => id !== elementId) // Utilisation de "as string" pour indiquer le type
+  : [...checkedItems, elementId as string];
+
+    setCheckedItems(updatedCheckedItems);
+
+    // Stocker les éléments cochés dans le stockage local
+    localStorage.setItem('checkedItems', JSON.stringify(updatedCheckedItems));
+  };
+
   return (
     <div className="container-formulaire-creer-annonce-2 mt-5">
     <form className="row g-3 needs-validation" noValidate>
@@ -47,7 +66,14 @@ const FormulaireCreerAnnonce2: React.FC = () => {
         { 
       equipementInterne?.map((element: any, index: number) => ( 
         <div className="form-check" key={element.id}>
-          <input className="form-check-input col-3" type="checkbox" value={element.id} id={`flexCheckDefault_${index}`}></input>
+          <input
+            className="form-check-input col-3"
+            type="checkbox"
+            value={element.id}
+            id={`flexCheckDefault_${index}`}
+            checked={checkedItems.includes(element.id)}
+            onChange={() => handleCheckboxChange(element.id)}
+          ></input>
           <label className="form-check-label col-9" htmlFor={`flexCheckDefault_${index}`}>
             {element.nom}
           </label>
