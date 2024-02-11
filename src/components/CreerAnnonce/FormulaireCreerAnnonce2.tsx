@@ -24,6 +24,7 @@ const FormulaireCreerAnnonce2: React.FC = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
           },
         });
         if (response.ok) {

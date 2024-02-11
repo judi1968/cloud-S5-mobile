@@ -5,6 +5,7 @@ import { IonContent, IonIcon } from '@ionic/react';
 import { checkmark, chevronBackSharp, chevronForward, handLeft, handRight, star } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 import API_DOMAIN from '../../config/config';
+import axios from 'axios';
 
 const FinishCreateAndValidateAnnonce: React.FC = () => {
   const history = useHistory();
@@ -63,54 +64,71 @@ const FinishCreateAndValidateAnnonce: React.FC = () => {
 
   }
 
-  const insertAnnonceAction = () => {
+  const insertAnnonceAction = async () => {
+    try {
+      const equipementInterneString = localStorage.getItem('equipementInterne');
+      const equipementInterne = equipementInterneString ? JSON.parse(equipementInterneString) : [];
+      const prixString = localStorage.getItem('prix');
+      const prix = prixString ? parseFloat(prixString) : 0;
+      const consoString = localStorage.getItem('consommation');
+      const conso = consoString ? parseFloat(consoString) : 0;
+      const comString = localStorage.getItem('commission');
+      const com = comString ? parseFloat(comString) : 0;
+      const response = await axios.post(
+        `${API_DOMAIN}/annonce`,
+        {
+          'prix': prix,
+          'code_annonce': "0000",
+          'annee_fabrication': localStorage.getItem('anne_modification'),
+          'couleur': localStorage.getItem('couleur'),
+          'consommation': conso,
+          'commission': com,
+          'categorie_voiture_id': localStorage.getItem('createAnnonceCategorie'),
+          'marque_voiture_id': localStorage.getItem('createAnnonceMarque'),
+          'type_carburant_voiture': localStorage.getItem('createAnnonceTypeCarburant'),
+          'transmission_voiture': localStorage.getItem('createAnnonceTransmission'),
+          'freignage_voiture': localStorage.getItem('createAnnonceFreinage'),
+          'equipement_interne': equipementInterne,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+
+          },
+        }
+      );
+
+      if (response.data.status === 200) {
+        // Authentification réussie, naviguez vers la page souhaitée
+        
+        localStorage.setItem("token", response.data.tknidclient);
+        // Récupérez le token du localStorage
+        const storedToken = localStorage.getItem("token");
+
+        // Utilisez le token comme nécessaire
+        console.log("Token récupéré :", storedToken);
+
+        history.push('/rooter_page');
+      }else{
+        // Gestion des erreurs d'authentification
+      }
+    } catch (error: any) {
+      // Gestion des erreurs réseau ou autres
+    } finally {
+    }
     history.push("/creer_annonce")
   }
   
   return (
     <IonContent>
-    <div className="container-formulaire-creer-annonce-3 mt-5">
-        <h1>Fin de creation</h1>
-        <div className='container-list-element-annonce'>
-            <ul className="list-group list-group-horizontal">
-                <li className="list-group-item active">Prix</li>
-                <li className="list-group-item">Audi</li>
-            </ul>
-            <ul className="list-group list-group-horizontal">
-                <li className="list-group-item active">Commission</li>
-                <li className="list-group-item">Audi</li>
-            </ul>
-            <ul className="list-group list-group-horizontal">
-                <li className="list-group-item active">Marque</li>
-                <li className="list-group-item">Audi</li>
-            </ul>
-            <ul className="list-group list-group-horizontal">
-                <li className="list-group-item active">Type Carburant</li>
-                <li className="list-group-item">A third item</li>
-            </ul>
-            <ul className="list-group list-group-horizontal">
-                <li className="list-group-item active">Categorie</li>
-                <li className="list-group-item">A third item</li>
-            </ul>
-            <ul className="list-group list-group-horizontal">
-                <li className="list-group-item active">Transmission</li>
-                <li className="list-group-item">A third item</li>
-            </ul>
-            <ul className="list-group list-group-horizontal">
-                <li className="list-group-item active">Freinage</li>
-                <li className="list-group-item">A third item</li>
-            </ul>
-        </div>
-        <ul className="list-group">
-            <li className="list-group-item active" aria-current="true">Equipement internes</li>
-            <li className="list-group-item">A second item</li>
-            <li className="list-group-item">A third item</li>
-            <li className="list-group-item">A fourth item</li>
-            <li className="list-group-item">And a fifth one</li>
-        </ul>
-        <div className="col-12">
+    <div className="container container-formulaire-creer-annonce-3 mt-5 " style={{justifyContent:'center',marginRight:'20%'}}>
+      <center>
+        <h1 style={{justifyContent:'center',marginTop:'50%'}}>Vous voulez creer cette annonce ?</h1>
+      </center>
+        <div className="col-11">
           <button className="btn btn-primary btn-prev" onClick={handlePrevEtape}> <IonIcon icon={chevronBackSharp} />Precedent</button>
-          <button className="btn btn-success btn-next" onClick={insertAnnonceAction}>Finir<IonIcon icon={checkmark} /></button>
+          <button className="btn btn-success btn-next" onClick={insertAnnonceAction}>Oui , je valide<IonIcon icon={checkmark} /></button>
       </div>
   </div>
   </IonContent>

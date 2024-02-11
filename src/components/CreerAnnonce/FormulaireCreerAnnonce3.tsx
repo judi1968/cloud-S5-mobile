@@ -14,6 +14,9 @@ const FormulaireCreerAnnonce3: React.FC = () => {
   const [priceAnnonce,setPriceAnnonce] = useState<number>(0);
   function convertirEnMontant(nombre:number) {
      // Vérifiez si le nombre est un nombre entier
+     if (!Number.isFinite(nombre)) {
+      nombre =  0; // Retourne 0 si le nombre est infini
+    }
   const estEntier = nombre % 1 === 0;
 
   // Formate le nombre en utilisant un espace comme séparateur de milliers
@@ -32,6 +35,7 @@ const FormulaireCreerAnnonce3: React.FC = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
         },
       });
       if (response.ok) {
@@ -55,6 +59,10 @@ const FormulaireCreerAnnonce3: React.FC = () => {
     }else{
       localStorage.setItem('commission',commissionData+"")
       localStorage.setItem('prix',priceAnnonce+"")
+      localStorage.setItem('couleur',colorData.substring(1)+"")
+      localStorage.setItem('anne_modification',dateData+"")
+      localStorage.setItem('consommation',consommationData+"")
+
       history.push("/finishEtapeCreationAnnonce")
     }
   }
@@ -68,6 +76,10 @@ const FormulaireCreerAnnonce3: React.FC = () => {
       setPriceAnnonce(0)
     }
   }
+  const [colorData,setColorData] = useState('000000');
+  const [dateData,setDateData] = useState('2000-01-01');
+  const [consommationData,setConsommationData] = useState('0');
+
   return (
     <IonContent>
     <div className="container-formulaire-creer-annonce-2 mt-5">
@@ -77,11 +89,17 @@ const FormulaireCreerAnnonce3: React.FC = () => {
     <div className="col-md">
     <div className="form-floating">
     <div className="form-floating mb-3">
-  <input type="number" className={etatPrix?'form-control is-invalid':'form-control'} id="floatingInput" onChange={handleMontantChange} placeholder=""/>
-  <label form="floatingInput" >Montant en ariary</label>
+    <small>Couleur</small>
+    <input type="color" className={'form-control'} id="floatingInputColor" value={colorData} onChange={(e) => setColorData(e.target.value)} placeholder=""/>
+    <small>Anne modification</small>
+    <input type="date" className={'form-control'} id="floatingInputAnne" value={dateData} onChange={(e) => setDateData(e.target.value)} placeholder=""/>
+    <small>Consommation</small>
+    <input type="number" className={'form-control'} id="floatingInputAnne" value={consommationData} onChange={(e) => setConsommationData(e.target.value)} placeholder=""/>
+    <small>Montant en ariary</small>
+    <input type="number" className={etatPrix?'form-control is-invalid':'form-control'} id="floatingInputMontant" onChange={handleMontantChange} placeholder=""/>
 </div>
     </div>
-    <p>{commission==0?'Pas de commission':'Commission de ce prix : '.concat(convertirEnMontant(commissionData))}</p>
+    <p>{commission==0?'Pas de commission':'Commission de ce prix : '.concat(convertirEnMontant(priceAnnonce/commissionData))}</p>
     </div>
       <div className="col-12">
           <button className="btn btn-primary btn-prev" onClick={handlePrevEtape}> <IonIcon icon={chevronBackSharp} />Precedent</button>

@@ -46,7 +46,6 @@ const RooterPage: React.FC = () => {
           <Redirect exact path="/rooter_page" to="/home" />
   
           <Route path="/home" render={() => <Accueil />} exact={true} />
-          <Route path="/message" render={() => <Message />} exact={true} />
           <Route path="/creer_annonce" render={() => <CreerAnnonce />} exact={true} />
         </IonRouterOutlet>
 
@@ -59,11 +58,6 @@ const RooterPage: React.FC = () => {
           <IonTabButton tab="creer_annonce" href="/creer_annonce">
             <IonIcon icon={pencil} />
             <IonLabel>Creer un annonce</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="message" href="/message">
-            <IonIcon icon={mail} />
-            <IonLabel>Message</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="login" onClick={handleLoginClick}>

@@ -8,8 +8,8 @@ import { useHistory } from 'react-router';
 
 const Formulaire: React.FC = () => {
   const history = useHistory();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('vaikanet@client.com');
+  const [password, setPassword] = useState('client');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -27,9 +27,9 @@ const Formulaire: React.FC = () => {
       setErrorMessage('');
 
       const response = await axios.post(
-        `${API_DOMAIN}/authentification_client`,
+        `${API_DOMAIN}/loginClient`,
         {
-          'username':username,
+          'email':username,
           password,
         },
         {
@@ -41,7 +41,8 @@ const Formulaire: React.FC = () => {
 
       if (response.data.status === 200) {
         // Authentification réussie, naviguez vers la page souhaitée
-        localStorage.setItem("token", response.data.token);
+        
+        localStorage.setItem("token", response.data.tknidclient);
         // Récupérez le token du localStorage
         const storedToken = localStorage.getItem("token");
 
@@ -73,6 +74,7 @@ const Formulaire: React.FC = () => {
               id="floatingInput"
               placeholder="name@example.com"
               onChange={handleUsernameChange}
+              value={username}
             />
             <label htmlFor="floatingInput">Nom d'utilisateur</label>
           </div>
@@ -83,6 +85,7 @@ const Formulaire: React.FC = () => {
               id="floatingPassword"
               placeholder="Password"
               onChange={handlePasswordChange}
+              value={password}
             />
             <label htmlFor="floatingPassword">Mot de passe</label>
           </div>

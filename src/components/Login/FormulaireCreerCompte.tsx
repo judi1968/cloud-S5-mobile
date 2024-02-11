@@ -60,11 +60,6 @@ const FormulaireCreerCompte: React.FC = () => {
       </center>
       <form>
         <div>
-            {message && (
-              <div className={message.includes('Succès') ? 'alert alert-success' : 'alert alert-danger'}>
-                {message}
-              </div>
-            )}
           <div className="form-floating mb-3">
             <input
               type="email"

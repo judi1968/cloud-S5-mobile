@@ -33,6 +33,7 @@ const FormulaireCreerAnnonce: React.FC = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
           },
         });
         if (response.ok) {
@@ -55,6 +56,7 @@ const FormulaireCreerAnnonce: React.FC = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
           },
         });
         if (response.ok) {
@@ -77,6 +79,8 @@ const FormulaireCreerAnnonce: React.FC = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+
           },
         });
         if (response.ok) {
@@ -99,6 +103,8 @@ const FormulaireCreerAnnonce: React.FC = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+
           },
         });
         if (response.ok) {
@@ -121,6 +127,7 @@ const FormulaireCreerAnnonce: React.FC = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
           },
         });
         if (response.ok) {
